@@ -30,10 +30,11 @@ class App extends Component {
     if (index - 1 > 0 && !this.cards[index - 1]) {
       this.changeCards(index, index - 1);
     }
-
     if (index + 1 < this.cards.length && !this.cards[index + 1]) {
       this.changeCards(index, index + 1);
     }
+
+    this.checkWin();
   };
 
   changeCards = (first, second) => {
@@ -41,6 +42,12 @@ class App extends Component {
     [cards[first], cards[second]] = [cards[second], cards[first]];
     this.cards = cards;
     this.forceUpdate(); // todo redux
+  };
+
+  checkWin = () => {
+    if (this.cards.join('') === "1234567891011121314150"){
+      alert('Победа!');
+    }
   };
 
   render() {
