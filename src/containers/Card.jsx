@@ -10,10 +10,18 @@ import './card.css';
 class App extends Component {
   render() {
     let {value, index, handlerClick} = this.props;
-    if (!value) value = "";
+    let className = ["card"];
+
+    if (!value) {
+      value = "";
+      className.push("-empty ");
+    }
+
 
     return (
-      <div className="card" onClick={e=>{handlerClick(index)}}>
+      <div
+        className={className.join(' ')}
+        onClick={e => {handlerClick(index)}}>
         {value}
       </div>
     );
