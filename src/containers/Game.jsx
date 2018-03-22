@@ -21,16 +21,16 @@ class App extends Component {
       return;
     }
 
-    if (index - 4 > 0 && !this.cards[index - 4]) {
+    if (index - 4 >= 0 && !this.cards[index - 4]) {
       this.changeCards(index, index - 4);
     }
-    if (index + 4 < this.cards.length && !this.cards[index + 4]) {
+    if (index + 4 <= this.cards.length && !this.cards[index + 4]) {
       this.changeCards(index, index + 4);
     }
-    if (index - 1 > 0 && !this.cards[index - 1]) {
+    if (index - 1 >= 0 && !this.cards[index - 1]) {
       this.changeCards(index, index - 1);
     }
-    if (index + 1 < this.cards.length && !this.cards[index + 1]) {
+    if (index + 1 <= this.cards.length && !this.cards[index + 1]) {
       this.changeCards(index, index + 1);
     }
 
@@ -45,7 +45,7 @@ class App extends Component {
   };
 
   checkWin = () => {
-    if (this.cards.join('') === "1234567891011121314150"){
+    if (this.cards.join('') === "1234567891011121314150") {
       alert('Победа!');
     }
   };

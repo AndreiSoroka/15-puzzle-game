@@ -1,12 +1,13 @@
 .card {
   position: relative;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 25%;
   box-sizing: border-box;
   border: solid 3px grey;
   border-radius: 5px;
   vertical-align: top;
-  padding: 2rem;
   font-size: 3rem;
   overflow: hidden; /* clearfix */
   cursor: pointer;
