@@ -15,16 +15,50 @@ class App extends Component {
     this.cards = shuffle(this.cards);
   }
 
+  handlerClick = index => {
+    // Клик по пустой карте
+    if (!this.cards[index]) {
+      return;
+    }
+
+    if (index - 4 > 0 && !this.cards[index - 4]) {
+      this.changeCards(index, index - 4);
+    }
+    if (index + 4 < this.cards.length && !this.cards[index + 4]) {
+      this.changeCards(index, index + 4);
+    }
+    if (index - 1 > 0 && !this.cards[index - 1]) {
+      this.changeCards(index, index - 1);
+    }
+
+    if (index + 1 < this.cards.length && !this.cards[index + 1]) {
+      this.changeCards(index, index + 1);
+    }
+  };
+
+  changeCards = (first, second) => {
+    let cards = [...this.cards];
+    [cards[first], cards[second]] = [cards[second], cards[first]];
+    this.cards = cards;
+    this.forceUpdate(); // todo redux
+  };
+
   render() {
-    let cards = this.cards.map(val=>(<Card value={val} />));
+    let cards = this.cards.map((value, index) => (
+      <Card
+        key={value}
+        value={value}
+        index={index}
+        handlerClick={this.handlerClick}
+      />
+    ));
 
     return (
       <div className="game">
         {cards}
-
       </div>
     );
-  }
+  };
 }
 
 export default App;

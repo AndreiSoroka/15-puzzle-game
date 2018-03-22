@@ -3,6 +3,8 @@
   display: inline-block;
   width: 25%;
   box-sizing: border-box;
-  border: 3px;
+  border: solid 3px grey;
   border-radius: 5px;
+  height: 40px;
+  vertical-align: top;
 }

@@ -9,9 +9,11 @@ import './card.css';
 
 class App extends Component {
   render() {
-    let {value} = this.props;
+    let {value, index, handlerClick} = this.props;
+    if (!value) value = "";
+
     return (
-      <div className="card">
+      <div className="card" onClick={e=>{handlerClick(index)}}>
         {value}
       </div>
     );
