@@ -21,16 +21,18 @@ class App extends Component {
       return;
     }
 
-    if (index - 4 >= 0 && !this.cards[index - 4]) {
+    let cards = this.cards;
+
+    if (index - 4 >= 0 && cards[index - 4] === 0) {
       this.changeCards(index, index - 4);
     }
-    if (index + 4 <= this.cards.length && !this.cards[index + 4]) {
+    else if (index + 4 <= cards.length && cards[index + 4] === 0) {
       this.changeCards(index, index + 4);
     }
-    if (index - 1 >= 0 && !this.cards[index - 1]) {
+    else if (index - 1 >= 0 && (index % 4) && cards[index - 1] === 0) {
       this.changeCards(index, index - 1);
     }
-    if (index + 1 <= this.cards.length && !this.cards[index + 1]) {
+    else if (index + 1 <= cards.length && ((index + 1) % 4) && cards[index + 1] === 0) {
       this.changeCards(index, index + 1);
     }
 
