@@ -1,11 +1,6 @@
 import React, {Component} from 'react';
-// import {bindActionCreators} from 'redux'
-// import {connect} from 'react-redux'
-
-// import * as userAction from '../store/user/action';
 
 import './card.css';
-
 
 class App extends Component {
   render() {
@@ -29,6 +24,3 @@ class App extends Component {
 }
 
 export default App;
-// export default connect(
-//   state => ({user: state.user}),
-//   dispatch => ({userAction: bindActionCreators(userAction, dispatch)}))(App)

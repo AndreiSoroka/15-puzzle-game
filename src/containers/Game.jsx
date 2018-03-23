@@ -1,76 +1,74 @@
 import React, {Component} from 'react';
-import {shuffle} from 'lodash';
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 
 import Card from './Card';
 import './game.css';
+import * as ActionsGame from '../store/game/action';
 
 
 class App extends Component {
   constructor(props) {
     super(props);
 
-    // массив от 0 до 15
-    this.cards = Array.from({length: 16}, (value, index) => index);
-    // перемешиваем массив
-    this.cards = shuffle(this.cards);
+    const {actions} = props;
+    this.actions = actions;
+
+    this.actions.createCards(16);
   }
 
-  handlerClick = index => {
-    // Клик по пустой карте
-    if (!this.cards[index]) {
-      return;
-    }
-
-    let cards = this.cards;
-
-    if (index - 4 >= 0 && cards[index - 4] === 0) {
-      this.changeCards(index, index - 4);
-    }
-    else if (index + 4 <= cards.length && cards[index + 4] === 0) {
-      this.changeCards(index, index + 4);
-    }
-    else if (index - 1 >= 0 && (index % 4) && cards[index - 1] === 0) {
-      this.changeCards(index, index - 1);
-    }
-    else if (index + 1 <= cards.length && ((index + 1) % 4) && cards[index + 1] === 0) {
-      this.changeCards(index, index + 1);
-    }
-
-    this.checkWin();
+  handlerMoveCard = index => {
+    this.actions.moveCard(index);
   };
 
-  changeCards = (first, second) => {
-    let cards = [...this.cards];
-    [cards[first], cards[second]] = [cards[second], cards[first]];
-    this.cards = cards;
-    this.forceUpdate(); // todo redux
-  };
-
-  checkWin = () => {
-    if (this.cards.join('') === "1234567891011121314150") {
-      alert('Победа!');
-    }
+  handlerBackMoveCard = () => {
+    this.actions.backMoveCard();
   };
 
   render() {
-    let cards = this.cards.map((value, index) => (
+    const {cards, isWin, countStep, countAction} = this.props;
+
+    if (isWin) {
+      return (<div className="game">
+        <h2>Примите мои поздравления! Это победа!</h2>
+        <div>Количество ходов: {countStep}</div>
+        <div>Количество действий: {countAction}</div>
+      </div>)
+    }
+
+    let cardsTemplate = cards.map((value, index) => (
       <Card
         key={value}
         value={value}
         index={index}
-        handlerClick={this.handlerClick}
+        handlerClick={this.handlerMoveCard}
       />
     ));
 
     return (
       <div className="game">
-        {cards}
+        <button
+          onClick={e => {
+            this.handlerBackMoveCard()
+          }}>
+          Вернуть ход
+        </button>
+        <div className="game__place">
+          {cardsTemplate}
+        </div>
       </div>
     );
   };
 }
 
-export default App;
-// export default connect(
-//   state => ({user: state.user}),
-//   dispatch => ({userAction: bindActionCreators(userAction, dispatch)}))(App)
+export default connect(
+  state => {
+    return ({
+      cards: state.game.cards,
+      isWin: state.game.isWin,
+      countStep: state.game.steps.length,
+      countAction: state.game.countAction,
+    })
+  },
+  dispatch => ({actions: bindActionCreators(ActionsGame, dispatch)})
+)(App)
