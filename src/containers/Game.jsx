@@ -10,7 +10,9 @@ class App extends Component {
     super(props);
 
     // массив от 0 до 15
-    this.cards = Array.from({length: 16}, (value, index) => index);
+    //// Андройд не поддерживает es7:
+    //// this.cards = Array.from({length: 16}, (value, index) => index);
+    this.cards = Array(17).join('+').split('').map((value, index) => index);
     // перемешиваем массив
     this.cards = shuffle(this.cards);
   }
