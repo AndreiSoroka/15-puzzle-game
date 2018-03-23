@@ -45,7 +45,7 @@ function moveCard(rootState, action) {
 
   // Клик по пустой карте
   if (!_state.cards[index]) {
-    return;
+    return _state;
   }
 
   let secondPosition = null;
