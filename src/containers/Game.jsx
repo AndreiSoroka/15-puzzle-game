@@ -30,9 +30,9 @@ class App extends Component {
 
     if (isWin) {
       return (<div className="game">
-        <h2>Примите мои поздравления! Это победа!</h2>
-        <div>Количество ходов: {countStep}</div>
-        <div>Количество действий: {countAction}</div>
+        <h2>Congratulations! It's a victory!</h2>
+        <div>Number of moves: {countStep}</div>
+        <div>Number of actions: {countAction}</div>
       </div>)
     }
 
@@ -51,7 +51,7 @@ class App extends Component {
           onClick={e => {
             this.handlerBackMoveCard()
           }}>
-          Вернуть ход
+          Undo Move
         </button>
         <div className="game__place">
           {cardsTemplate}
