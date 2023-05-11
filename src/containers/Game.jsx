@@ -9,16 +9,16 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    // массив от 0 до 15
-    //// Андройд не поддерживает es7:
-    //// this.cards = Array.from({length: 16}, (value, index) => index);
+    // array from 0 to 15
+    // Android doesn't support es7:
+    // this.cards = Array.from({length: 16}, (value, index) => index);
     this.cards = Array(17).join('+').split('').map((value, index) => index);
-    // перемешиваем массив
+    // shuffle the array
     this.cards = shuffle(this.cards);
   }
 
   handlerClick = index => {
-    // Клик по пустой карте
+    // Click on an empty card
     if (!this.cards[index]) {
       return;
     }
@@ -50,7 +50,7 @@ class App extends Component {
 
   checkWin = () => {
     if (this.cards.join('') === "1234567891011121314150") {
-      alert('Победа!');
+      alert('Victory!');
     }
   };
 
